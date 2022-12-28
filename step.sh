@@ -58,5 +58,6 @@ https://lab-api.nowsecure.com/assessment/$taskID/findings -o AssessmentfindingsR
 		curl -X POST -H "Authorization: Bearer $nowsecure_api_token" https://api.bitrise.io/v0.1/apps/$BITRISE_APP_SLUG/builds/$BITRISE_BUILD_SLUG/abort -d '{"abort_reason": "NowSecure Assessment Findings Internal API Error"}'
  	fi
 else
-curl -X POST -H "Authorization: Bearer $nowsecure_api_token" https://api.bitrise.io/v0.1/apps/$BITRISE_APP_SLUG/builds/$BITRISE_BUILD_SLUG/abort -d '{"abort_reason": "NowSecure Assessment List Internal API Error"}'
+curl -H "Authorization: Bearer $nowsecure_api_token" -X POST \
+https://api.bitrise.io/v0.1/apps/$BITRISE_APP_SLUG/builds/$BITRISE_BUILD_SLUG/abort -d '{"abort_reason": "NowSecure Assessment List Internal API Error"}'
 fi
