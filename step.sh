@@ -45,7 +45,7 @@ if [ ! -z "$taskID" ] ;	then
 	AssessmentfindingsCall=$(curl -H "Authorization: Bearer $nowsecure_api_token" -X GET \
 https://lab-api.nowsecure.com/assessment/$taskID/findings -o AssessmentfindingsResponse.json)
 	if [ -s AssessmentfindingsResponse.json ] ; then
-		severityCount=$(jq '.[].severity' AssessmentReport.json | grep "medium\|high\|critical" | wc -l)
+		severityCount=$(jq '.[].severity' AssessmentfindingsResponse.json | grep "medium\|high\|critical" | wc -l)
 		echo "severityCount===>"$severityCount
 		if [ $severityCount -ge 1 ] ; then 
 			echo "Abort Going to Call----->>>"
