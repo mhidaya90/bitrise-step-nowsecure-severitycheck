@@ -17,6 +17,11 @@ if [ -z "${package}" ] ; then
   exit 1
 fi
 
+if [ -z "${bitrise_token}" ] ; then
+  echo " [!] Missing required input: package"
+  exit 1
+fi
+
 rm -f AssessmentlistResponse.json
 
 AssessmentListCall=$(curl -H "Authorization: Bearer $nowsecure_api_token" -X GET \
@@ -49,14 +54,14 @@ https://lab-api.nowsecure.com/assessment/$taskID/findings -o AssessmentfindingsR
 		echo "severityCount===>"$severityCount
 		if [ $severityCount -ge 1 ] ; then 
 			echo "Abort Going to Call----->>>"
-              		curl -X POST -H "Authorization: $Bitrise_Access_Token" https://api.bitrise.io/v0.1/apps/$BITRISE_APP_SLUG/builds/$BITRISE_BUILD_SLUG/abort -d '{"abort_reason": "Now Secure Identified Medium/High Priority Risk in App Bundle"}'
+              		curl -X POST -H "Authorization: $bitrise_token" https://api.bitrise.io/v0.1/apps/$BITRISE_APP_SLUG/builds/$BITRISE_BUILD_SLUG/abort -d '{"abort_reason": "Now Secure Identified Medium/High Priority Risk in App Bundle"}'
           	else
 			echo "Application has no Severities, Good to go for Production..!!!"
 			exit 0
 		fi
  	else
-		curl -X POST -H "Authorization: $Bitrise_Access_Token" https://api.bitrise.io/v0.1/apps/$BITRISE_APP_SLUG/builds/$BITRISE_BUILD_SLUG/abort -d '{"abort_reason": "NowSecure Assessment Findings Internal API Error"}'
+		curl -X POST -H "Authorization: $bitrise_token" https://api.bitrise.io/v0.1/apps/$BITRISE_APP_SLUG/builds/$BITRISE_BUILD_SLUG/abort -d '{"abort_reason": "NowSecure Assessment Findings Internal API Error"}'
  	fi
 else
-curl -X POST -H "Authorization: $Bitrise_Access_Token" https://api.bitrise.io/v0.1/apps/$BITRISE_APP_SLUG/builds/$BITRISE_BUILD_SLUG/abort -d '{"abort_reason": "NowSecure Assessment List Internal API Error"}'
+curl -X POST -H "Authorization: $bitrise_token" https://api.bitrise.io/v0.1/apps/$BITRISE_APP_SLUG/builds/$BITRISE_BUILD_SLUG/abort -d '{"abort_reason": "NowSecure Assessment List Internal API Error"}'
 fi

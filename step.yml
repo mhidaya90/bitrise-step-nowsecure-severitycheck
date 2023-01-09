@@ -40,3 +40,11 @@ inputs:
         is_sensitive: true
         summary: The package identifier for application
         title: Application Package/Bundle Identifier
+    - bitrise_token:
+      opts:
+	description: |
+          BItrise Token generated from Bitrise Portal
+        is_required: true
+        is_sensitive: true
+        summary: Bitrise Token generated from bitrise portal, the token helps to abort the build when any severity find.
+        title: Bitrise Access Token
