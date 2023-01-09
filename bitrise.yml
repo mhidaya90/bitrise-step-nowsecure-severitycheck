@@ -43,7 +43,7 @@ workflows:
         - nowsecure_api_token: $NOWSECURE_TOKEN
         - platform: $APP_PLATFORM
         - package: $APP_PACKAGE
-	- bitrise_token: $BITRISE_TOKEN
+        - bitrise_token: $BITRISE_TOKEN
     - script:
         inputs:
         - content: |

@@ -42,8 +42,8 @@ inputs:
         title: Application Package/Bundle Identifier
     - bitrise_token:
       opts:
-	description: |
-          BItrise Token generated from Bitrise Portal
+        description: |
+          Bitrise token generated from Bitrise Console
         is_required: true
         is_sensitive: true
         summary: Bitrise Token generated from bitrise portal, the token helps to abort the build when any severity find.
